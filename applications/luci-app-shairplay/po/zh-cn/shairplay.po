@@ -1,0 +1,38 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "AO Device ID"
+msgstr "音频输出设备ID"
+
+msgid "AO Device Name"
+msgstr "音频输出设备名称"
+
+msgid "AO Driver"
+msgstr "音频输出设备驱动程序"
+
+msgid "Airport Name"
+msgstr "Airport名称"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Enabled"
+msgstr "启用"
+
+msgid "HW Address"
+msgstr "硬件地址"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Port"
+msgstr "端口"
+
+msgid "Respawn"
+msgstr "复位"
+
+msgid "Shairplay"
+msgstr ""
+
+msgid "Shairplay is a simple AirPlay server implementation, here you can configure the settings."
+msgstr "Shairplay是一个简单的AirPlay服务器实现。在这里，您可以进行配置设置。"
