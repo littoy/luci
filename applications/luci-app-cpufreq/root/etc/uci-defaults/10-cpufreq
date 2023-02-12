@@ -13,6 +13,11 @@ CPU_FREQS="$(cat '/sys/devices/system/cpu/cpufreq/policy0/scaling_available_freq
 CPU_POLICYS="$(find '/sys/devices/system/cpu/cpufreq/policy'* -maxdepth 0 | grep -Eo '[0-9]+')"
 source "/etc/openwrt_release"
 case "$DISTRIB_TARGET" in
+	"x86/64")
+		CPU_MAX_FREQ=$(cat /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq)
+		CPU_MIN_FREQ=$(cat /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq)
+		uci_write_config 0 schedutil $CPU_MIN_FREQ $CPU_MAX_FREQ
+		;;
 	"bcm27xx/bcm2710")
 		uci_write_config 0 ondemand 600000 1200000 10 50
 		;;
