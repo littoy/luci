@@ -23,6 +23,7 @@ local policy_nums = luci.sys.exec("echo -n $(find /sys/devices/system/cpu/cpufre
 for _, policy_num in ipairs(string.split(policy_nums, " ")) do
 	if not fs.access("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/scaling_min_freq") then return end
 	cpu_freqs = ""
+	cpu_governors = ""
 	if not fs.access("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/scaling_available_frequencies") then
 		if not fs.access("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/cpuinfo_min_freq") then return end
 		cpu_freqs = fs.readfile("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/cpuinfo_min_freq")
@@ -30,13 +31,15 @@ for _, policy_num in ipairs(string.split(policy_nums, " ")) do
 		cpu_min_freq_number = tonumber(cpu_freqs)
 		cpu_freqs = cpu_freqs .. " " .. (cpu_min_freq_number*1.4) .. " " .. (cpu_min_freq_number*1.4*1.4) .. " " .. fs.readfile("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/cpuinfo_max_freq")
 		cpu_freqs = string.sub(cpu_freqs, 1, -2)
+		cpu_governors = fs.readfile("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/scaling_available_governors")
+		cpu_governors = string.sub(cpu_governors, 1, -2)
 	else
 		cpu_freqs = fs.readfile("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/scaling_available_frequencies")
 		cpu_freqs = string.sub(cpu_freqs, 1, -3)
+		cpu_governors = fs.readfile("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/scaling_available_governors")
+		cpu_governors = string.sub(cpu_governors, 1, -3)
 	end
 
-	cpu_governors = fs.readfile("/sys/devices/system/cpu/cpufreq/policy" .. policy_num .. "/scaling_available_governors")
-	cpu_governors = string.sub(cpu_governors, 1, -3)
 
 
 	freq_array = string.split(cpu_freqs, " ")
