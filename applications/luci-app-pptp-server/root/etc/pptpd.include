@@ -7,5 +7,6 @@ iptables -A forwarding_rule -i pppoe+ -j RETURN
 iptables -A forwarding_rule -o pppoe+ -j RETURN
 iptables -A forwarding_rule -i ppp+ -m conntrack --ctstate NEW  -j ACCEPT
 iptables -A forwarding_rule -o ppp+ -m conntrack --ctstate NEW -j ACCEPT
+breth=$(ip a|grep ": br-"|awk '{print $2}'|awk -F: '{print $1}')
 
-echo 1 > /proc/sys/net/ipv4/conf/br-lan/proxy_arp
+echo 1 > /proc/sys/net/ipv4/conf/$breth/proxy_arp
