@@ -65,15 +65,15 @@ for _, policy_num in ipairs(string.split(policy_nums, " ")) do
 	sdfactor = s:taboption(policy_num, Value, "sdfactor" .. policy_num, translate("CPU Switching Sampling rate"))
 	sdfactor.datatype="range(1,100000)"
 	sdfactor.description = translate("The sampling rate determines how frequently the governor checks to tune the CPU (ms)")
-	sdfactor.placeholder = 10
-	sdfactor.default = 10
+	sdfactor.placeholder = 5
+	sdfactor.default = 5
 	sdfactor:depends("governor" .. policy_num, "ondemand")
 
 	upthreshold = s:taboption(policy_num, Value, "upthreshold" .. policy_num, translate("CPU Switching Threshold"))
 	upthreshold.datatype="range(1,99)"
 	upthreshold.description = translate("Kernel make a decision on whether it should increase the frequency (%)")
-	upthreshold.placeholder = 50
-	upthreshold.default = 50
+	upthreshold.placeholder = 60
+	upthreshold.default = 60
 	upthreshold:depends("governor" .. policy_num, "ondemand")
 end
 
