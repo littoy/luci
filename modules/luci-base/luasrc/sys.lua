@@ -317,7 +317,12 @@ end
 function net.conntrack(callback)
 	local ok, nfct = pcall(io.lines, "/proc/net/nf_conntrack")
 	if not ok or not nfct then
-		return nil
+		local nfctipv4 = luci.util.exec("/usr/sbin/conntrack -L -o extended")
+		if not nfctipv4 then
+			return nil
+        end
+		local nfctipv6 = luci.util.exec("/usr/sbin/conntrack -L -f ipv6 -o extended")
+		nfct = (nfctipv4..nfctipv6):gmatch("([^\n]*)\n?")
 	end
 
 	local line, connt = nil, (not callback) and { }
