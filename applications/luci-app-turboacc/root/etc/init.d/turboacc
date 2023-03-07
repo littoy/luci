@@ -368,7 +368,7 @@ check_status(){
 		fi
 		;;
 	"fullconenat")
-    if [ -z "$(iptables -t nat -L zone_wan_postrouting | grep -i fullcone)" ]; then
+    if [ -z "$(iptables -t nat -L | grep -i fullcone)" ]; then
       exit 1
     else
       exit 0
