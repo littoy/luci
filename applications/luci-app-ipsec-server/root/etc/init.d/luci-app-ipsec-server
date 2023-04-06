@@ -69,6 +69,9 @@ gen_include() {
 }
 
 start() {
+	if [ ! -f /usr/lib/ipsec/plugins/libipsec.so.0 ] && [ -f /usr/lib/ipsec/libipsec.so.0.0.0 ]; then
+		ln -s /usr/lib/ipsec/libipsec.so.0.0.0 /usr/lib/ipsec/plugins/libipsec.so.0
+	fi
 	local vt_enabled=$(uci -q get ${CONFIG}.@service[0].enabled)
 	[ "$vt_enabled" = 0 ] && return 1
 	
